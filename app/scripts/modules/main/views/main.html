@@ -1,0 +1,59 @@
+<!-- main view -->
+<md-content class="main-index-container">
+    <!-- header with video -->
+    <div class="header">
+        <div class="video-cover"></div>
+        <video-bg video-id="main.videoId" start="0" mobile-image="images/book-bg1.jpg"></video-bg>
+
+        <p class="title-1">Discover Section Challenge</p>
+        <p class="subtitle-1">
+            Front End Developer <br>
+            done by <b>Matías Caputti</b>
+        </p>
+    </div>
+
+    <!-- green middle container -->
+    <div class="center container-1">
+        <div class="jumbotron green-bg">
+            <h1>Discover Section Challenge</h1>
+            <p>
+                <b>Front End Developer</b>
+            </p>
+            <p>done by <b>Matías Caputti</b> to <b>Discover Section Challenge</b></p>
+        </div>
+    </div>
+
+    <!-- footer with last books -->
+    <div class="parallax-bg" parallax-background parallax-ratio="0.4">
+        <p class="title-2">
+            Our last books
+        </p>
+        <md-content class="books" layout="row">
+            <div flex="100" flex-gt-sm="33" ng-repeat="book in main.books">
+                <md-card class="pointer" ui-sref="app.booksDetail({bookId: book.id})">
+                    <img ng-src="{{book.cover}}" class="md-card-image">
+                    <md-card-title>
+                        <md-card-title-text>
+                            <span class="md-headline">{{book.name}}</span>
+                            <span class="md-subhead">{{book.author.name}}</span>
+                        </md-card-title-text>
+                    </md-card-title>
+
+                    <md-card-actions layout="row" layout-align="start center">
+                        <md-button>
+                            <i class="fa fa-heart-o"></i> {{book.likes}}
+                        </md-button>
+                        <md-card-icon-actions>
+                            <span class="card-date">{{main.relativeDate(book.published)}}</span>
+                        </md-card-icon-actions>
+                    </md-card-actions>
+                </md-card>
+            </div>
+        </md-content>
+
+        <div class="center">
+            <md-button class="md-raised green-bg" ui-sref="app.booksList">Show all books</md-button>
+        </div>
+    </div>
+</md-content>
+<!-- / main view -->

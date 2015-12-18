@@ -1,0 +1,72 @@
+<!-- books list view -->
+<div class="main-books-container">
+    <!-- green header -->
+    <div class="header">
+        <p class="title">
+            Sales Rep Application
+        </p>
+    </div>
+
+    <!-- search/filter section -->
+    <md-content class="body" layout-wrap>
+        <div class="form-group">
+            <!-- search input -->
+            <div class="input-group">
+                <div class="input-group-addon"><i class="fa fa-search search-icon"></i></div>
+                <input type="text" class="form-control search-text" placeholder="Search books by name" ng-model="list.searchBookName">
+                <input type="text" class="form-control search-text" placeholder="Search books by author" ng-model="list.searchBookAuthor">
+            </div>
+
+            <!-- filter section -->
+            <div class="filter-text center md-padding">
+                <p>
+                  <span>Find me the best</span>
+                  <select ng-model="list.selectedCategory" ng-options="category for category in list.uniqueCategories"></select>
+                  <span>books about</span>
+                  <select ng-model="list.selectedGenre" ng-options="genre for genre in list.uniqueGenres"></select>
+                  <span class="refresh" ng-click="list.refresh()"><i class="fa fa-refresh icon" uib-tooltip="Clear filters" tooltip-placement="bottom"></i></span>
+                </p>
+            </div>
+
+            <!-- text if no results found -->
+            <div ng-if="!filtered.length" class="center">
+                <p class="error-text">There are no results!</p>
+            </div>
+        </div>
+
+        <!-- books list container -->
+        <div flex="100" flex-gt-xs="50" flex-gt-sm="25"
+            dir-paginate="book in filtered = (list.books |
+            orderBy:'name' |
+            filter: { name: list.searchBookName } |
+            filter: { author: { name: list.searchBookAuthor } } |
+            filter: { genre: { category: list.selectedCategory } } : true |
+            filter: { genre: { name: list.selectedGenre } } : true
+            ) | itemsPerPage: 12
+        ">
+            <!-- each book -->
+            <md-card class="pointer" ui-sref="app.booksDetail({bookId: book.id})">
+                <img ng-src="{{book.cover}}" class="md-card-image">
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{book.name}}</span>
+                        <span class="md-subhead">{{book.author.name}}</span>
+                    </md-card-title-text>
+                </md-card-title>
+
+                <md-card-actions layout="row" layout-align="start center">
+                    <md-button><i class="fa fa-heart-o"></i> {{book.likes}}</md-button>
+                    <md-card-icon-actions>
+                        <span class="card-date">{{list.relativeDate(book.published)}}</span>
+                    </md-card-icon-actions>
+                </md-card-actions>
+            </md-card>
+        </div>
+    </md-content>
+
+    <!-- pagination controls -->
+    <div class="text-center">
+        <dir-pagination-controls></dir-pagination-controls>
+    </div>
+</div>
+<!-- / books list view -->

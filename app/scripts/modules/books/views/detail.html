@@ -1,0 +1,68 @@
+<!-- books detail view -->
+<div class="detail-books-container">
+    <md-content class="body">
+        <!-- book information -->
+        <div class="header">
+            <div class="parallax-bg center" style="background-image: url({{detail.book.cover}});" parallax-background parallax-ratio="0.4">
+                <p class="title-1">{{detail.book.name}}</p>
+                <p class="subtitle-1">By {{detail.book.author.name}}</p>
+                <div class="sub-header-1">
+                    <p class="text-1">{{detail.book.description}}</p>
+                </div>
+                <div class="sub-header-2">
+                    <p class="text-1">
+                        Categories: <u>{{detail.book.genre.category}}</u>, <u>{{detail.book.genre.name}}</u>
+                    </p>
+                    <p class="text-1">
+                        <span><i class="fa fa-heart-o"></i> {{detail.book.likes}}</span>
+                        |
+                        <span>published {{detail.relativeDate(detail.book.published)}}</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- book introduction -->
+        <div class="detail">
+            <p class="text-1">Introduction</p>
+            <p class="text-2">asdasda asda adas </p>
+            <p class="text-3" ng-repeat="paragraph in detail.book.introduction">{{paragraph.content}}</p>
+        </div>
+
+        <!-- book author -->
+        <div class="author">
+            <hr>
+            <img ng-src="{{detail.book.author.avatar}}" class="avatar">
+            <p class="text-1">Written by {{detail.book.author.name}}</p>
+        </div>
+
+        <!-- related books -->
+        <div class="related">
+            <p class="title-1">Similar reading</p>
+            <p class="title-2">If you liked this book, we recommend you check out these emerging titles.</p>
+            <md-content class="books" layout="row">
+                <!-- related books list container -->
+                <div flex="100" flex-gt-sm="33" ng-repeat="book in detail.relatedBooks">
+                    <!-- each book -->
+                    <md-card class="pointer" ui-sref="app.booksDetail({bookId: book.id})">
+                        <img ng-src="{{book.cover}}" class="md-card-image">
+                        <md-card-title>
+                            <md-card-title-text>
+                                <span class="md-headline">{{book.name}}</span>
+                                <span class="md-subhead">{{book.author.name}}</span>
+                            </md-card-title-text>
+                        </md-card-title>
+
+                        <md-card-actions layout="row" layout-align="start center">
+                            <md-button><i class="fa fa-heart-o"></i> {{book.likes}}</md-button>
+                            <md-card-icon-actions>
+                                <span class="card-date">{{detail.relativeDate(book.published)}}</span>
+                            </md-card-icon-actions>
+                        </md-card-actions>
+                    </md-card>
+                </div>
+            </md-content>
+        </div>
+    </md-content>
+</div>
+<!-- / books detail view -->
