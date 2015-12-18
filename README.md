@@ -54,3 +54,5 @@ Code Folder (root)
 |--- package.json (this file contains the name and version of all javascript packages)
 |--- Gruntfile.js (this file contains all the Grunt automatization configurations)
 |--- README.txt (this files contains a report about all the work done and how to run the application)
+
+![alt tag](http://i.imgur.com/vCYXQ84.png)
